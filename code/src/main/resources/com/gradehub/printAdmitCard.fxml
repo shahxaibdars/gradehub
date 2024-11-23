@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.PrintAdmitCardController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <Label text="Print Admit Card" styleClass="label-header"/>
+    
+    <!-- Label and TextArea to display eligible courses -->
+    <Label text="Eligible Courses:" styleClass="label-normal"/>
+    <TextArea fx:id="eligibleCoursesTextArea" editable="false" wrapText="true" maxWidth="300" maxHeight="150" styleClass="text-area"/>
+    
+    <!-- Button to generate admit card preview -->
+    <Button text="Generate Admit Card" onAction="#generateAdmitCard" styleClass="button"/>
+
+    <!-- TextArea for admit card preview -->
+    <TextArea fx:id="admitCardPreviewTextArea" editable="false" wrapText="true" maxWidth="300" maxHeight="150" styleClass="text-area"/>
+    
+    <!-- Buttons for print and download -->
+    <HBox alignment="CENTER" spacing="10">
+        <Button text="Print" onAction="#handlePrint" styleClass="button"/>
+        <Button text="Download" onAction="#handleDownload" styleClass="button"/>
+    </HBox>
+    
+    <!-- Back Button -->
+    <Button text="Back" onAction="#goBack" styleClass="button"/>
+</VBox>

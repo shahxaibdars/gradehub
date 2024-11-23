@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.StudentDashboardController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+      
+    <Label text="Student Dashboard" styleClass="label-header"/>
+    
+    <Button text="View Marks" onAction="#openViewMarks" styleClass="button"/>
+    <Button text="View Attendance" onAction="#openViewAttendance" styleClass="button"/>
+    <Button text="Register Courses" onAction="#openRegisterCourses" styleClass="button"/>
+    <Button text="Withdraw Course" onAction="#openWithdrawCourse" styleClass="button"/>
+    <Button text="Print Fee Challan" onAction="#openPrintFeeChallan" styleClass="button"/>
+    <Button text="Print Admit Card" onAction="#openPrintAdmitCard" styleClass="button"/>
+    <Button text="Logout" fx:id="logoutButton" onAction="#handleLogout" styleClass="button"/>
+</VBox>

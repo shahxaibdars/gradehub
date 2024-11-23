@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.UploadMarksController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <!-- Header Label with custom style -->
+    <Label text="Upload Marks" styleClass="label-header"/>
+    
+    <!-- ChoiceBox for selecting course -->
+    <ChoiceBox fx:id="courseChoiceBox" maxWidth="250" styleClass="choice-box"/>
+    
+    <!-- ChoiceBox for selecting assessment type -->
+    <ChoiceBox fx:id="assessmentTypeChoiceBox" maxWidth="250" styleClass="choice-box"/>
+    
+    <!-- TextField for entering Student ID with promptText -->
+    <TextField fx:id="studentIdField" promptText="Enter Student ID" maxWidth="250" styleClass="text-field"/>
+    
+    <!-- TextField for entering marks with promptText -->
+    <TextField fx:id="marksField" promptText="Enter Marks" maxWidth="250" styleClass="text-field"/>
+    
+    <!-- Buttons for submission and navigation -->
+    <Button text="Submit" onAction="#handleUploadMarks" maxWidth="100" styleClass="button"/>
+    <Button text="Back" onAction="#goBack" maxWidth="100" styleClass="button"/>
+    
+    <!-- Status label for success/error messages -->
+    <Label fx:id="statusLabel" styleClass="label-status"/>
+</VBox>

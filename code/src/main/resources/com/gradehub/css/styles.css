@@ -1,0 +1,64 @@
+/* General styles for the root scene */
+.root {
+    -fx-background-color: #0A1F44; /* Dark blue background */
+    -fx-padding: 20;
+}
+
+/* Header styling */
+.label-header {
+    -fx-font-family: "Arial Black", sans-serif;
+    -fx-font-size: 28px;
+    -fx-text-fill: #D6E0F5; /* Light blue text */
+    -fx-padding: 10 0 20 0;
+}
+
+/* General label styles */
+.label {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF; /* White text */
+}
+
+/* TextField styling */
+.text-field {
+    -fx-background-color: #132C54; /* Darker shade of blue */
+    -fx-text-fill: #D6E0F5; /* Light blue text */
+    -fx-prompt-text-fill: #9CB3D9; /* Lighter blue prompt text */
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+}
+
+/* ChoiceBox styling */
+.choice-box {
+    -fx-background-color: #132C54;
+    -fx-text-fill: #D6E0F5;
+    -fx-background-radius: 5;
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #1C3A75; /* Dark blue */
+    -fx-text-fill: #D6E0F5; /* Light blue text */
+    -fx-font-family: "Tahoma", sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #2C4E8A; /* Lighter shade on hover */
+}
+
+/* Status Label Styling */
+.label-status {
+    -fx-font-family: "Verdana", sans-serif;
+    -fx-font-size: 12px;
+    -fx-text-fill: #FFD700; /* Yellow text for status */
+}
+
+/* Style for VBox layout */
+.vbox {
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}

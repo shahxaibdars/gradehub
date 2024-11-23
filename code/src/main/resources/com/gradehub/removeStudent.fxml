@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.RemoveStudentController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <Label text="Remove Student" styleClass="label-header"/>
+    
+    <!-- TextField for entering Student ID -->
+    <TextField fx:id="studentIdField" promptText="Enter Student ID" maxWidth="250" styleClass="text-field"/>
+    
+    <!-- Submit Button -->
+    <Button text="Submit" onAction="#handleRemoveStudent" styleClass="button"/>
+    
+    <!-- Status Label for messages -->
+    <Label fx:id="statusLabel" styleClass="label-status"/>
+    
+    <!-- Back Button -->
+    <Button text="Back" onAction="#goBack" styleClass="button"/>
+</VBox>

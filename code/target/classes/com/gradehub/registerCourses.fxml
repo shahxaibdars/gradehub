@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.RegisterCoursesController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <Label text="Register Courses" styleClass="label-header"/>
+    
+    <!-- VBox to hold CheckBox elements for courses -->
+    <VBox fx:id="coursesContainer" spacing="10" styleClass="vbox-inner" maxWidth="300"/>
+
+    <!-- Button to confirm registration -->
+    <Button text="Register Selected Courses" onAction="#handleRegisterCourses" styleClass="button"/>
+    
+    <!-- Label to display registration status -->
+    <Label fx:id="statusLabel" styleClass="label-status"/>
+    
+    <!-- Back Button -->
+    <Button text="Back" onAction="#goBack" styleClass="button"/>
+</VBox>

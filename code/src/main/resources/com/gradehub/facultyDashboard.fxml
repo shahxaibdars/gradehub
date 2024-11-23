@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.FacultyDashboardController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <Label text="Faculty Dashboard" styleClass="label-header"/>
+    
+    <Button text="Upload Marks" onAction="#openUploadMarks" maxWidth="200" styleClass="button"/>
+    <Button text="Upload Attendance" onAction="#openUploadAttendance" maxWidth="200" styleClass="button"/>
+    <Button text="Logout" onAction="#handleLogout" maxWidth="100" styleClass="button"/>
+</VBox>

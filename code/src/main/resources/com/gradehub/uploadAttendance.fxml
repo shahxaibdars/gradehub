@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.UploadAttendanceController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <!-- Header Label -->
+    <Label text="Upload Attendance" styleClass="label-header"/>
+    
+    <!-- ChoiceBox for selecting course -->
+    <ChoiceBox fx:id="courseChoiceBox" maxWidth="250" styleClass="choice-box"/>
+    
+    <!-- TextField for entering date -->
+    <TextField fx:id="dateField" promptText="Enter Date (dd/MM/yyyy)" maxWidth="250" styleClass="text-field"/>
+    
+    <!-- TextField for entering Student ID -->
+    <TextField fx:id="studentIdField" promptText="Enter Student ID" maxWidth="250" styleClass="text-field"/>
+    
+    <!-- ChoiceBox for selecting attendance status -->
+    <ChoiceBox fx:id="attendanceChoiceBox" maxWidth="150" styleClass="choice-box"/>
+    
+    <!-- Submit Button -->
+    <Button text="Submit" onAction="#handleUploadAttendance" maxWidth="100" styleClass="button"/>
+    
+    <!-- Status Label -->
+    <Label fx:id="statusLabel" styleClass="label-status"/>
+    
+    <!-- Back Button -->
+    <Button text="Back" onAction="#goBack" maxWidth="100" styleClass="button"/>
+</VBox>

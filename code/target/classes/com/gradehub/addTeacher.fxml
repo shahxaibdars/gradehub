@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.AddTeacherController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <Label text="Add Teacher" styleClass="label-header"/>
+    
+    <TextField fx:id="teacherIdField" promptText="Enter Teacher ID" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="teacherNameField" promptText="Enter Name" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="contactDetailsField" promptText="Enter Contact Details" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="courseField" promptText="Enter Course" maxWidth="250" styleClass="text-field"/>
+    
+    <Button text="Submit" onAction="#handleAddTeacher" styleClass="button"/>
+    <Label fx:id="statusLabel" styleClass="label-status"/>
+    <Button text="Back" onAction="#goBack" styleClass="button"/>
+</VBox>

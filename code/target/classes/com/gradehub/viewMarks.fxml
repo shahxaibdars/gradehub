@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradehub.ViewMarksController"
+      stylesheets="@com/gradehub/css/styles.css"
+      styleClass="vbox">
+
+    <Label text="View Marks" styleClass="label-header"/>
+    
+    <!-- ChoiceBox for selecting course -->
+    <ChoiceBox fx:id="courseChoiceBox" maxWidth="250" styleClass="choice-box"/>
+    
+    <!-- ChoiceBox for selecting test type -->
+    <ChoiceBox fx:id="testTypeChoiceBox" maxWidth="250" styleClass="choice-box"/>
+    
+    <!-- Button to view marks -->
+    <Button text="View Marks" onAction="#handleViewMarks" styleClass="button"/>
+    
+    <!-- TextArea to display marks -->
+    <TextArea fx:id="marksTextArea" editable="false" wrapText="true" maxWidth="200" maxHeight="50" styleClass="text-area"/>
+
+    <!-- Back Button -->
+    <Button text="Back" onAction="#goBack" styleClass="button"/>
+</VBox>
