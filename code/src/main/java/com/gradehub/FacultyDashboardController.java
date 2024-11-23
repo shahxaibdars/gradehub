@@ -9,6 +9,12 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class FacultyDashboardController {
+    
+    // private String userId;
+
+    // public void setUserId(String userId) {
+    //     this.userId = userId;
+    // }
 
     @FXML
     private void openUploadMarks(ActionEvent event) {

@@ -2,6 +2,10 @@ package com.gradehub;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import javafx.event.ActionEvent;
 
 public class RemoveStudentController {
@@ -31,8 +35,39 @@ public class RemoveStudentController {
 
     private boolean removeStudentFromDatabase(String studentId) {
         // Simulated database removal logic
-        System.out.println("Removing student with ID: " + studentId);
-        return true; // Return true if removal is successful
+        //System.out.println("Removing student with ID: " + studentId);
+        try{
+            String deleteQuery = "DELETE FROM Student WHERE userID = ?";
+            try(Connection conn = DatabaseConnector.connect();
+            PreparedStatement pstmt = conn.prepareStatement(deleteQuery)) {
+
+                pstmt.setString(1, studentId);
+
+                int rowsAffected = pstmt.executeUpdate();
+    
+                if (rowsAffected > 0) {
+                    System.out.println("Data deleted successfully from student table!");
+                }
+            }
+
+            String deleteQuery2 = "DELETE FROM User WHERE userID = ?";
+            try(Connection conn = DatabaseConnector.connect();
+            PreparedStatement pstmt = conn.prepareStatement(deleteQuery2)) {
+
+                pstmt.setString(1, studentId);
+
+                int rowsAffected = pstmt.executeUpdate();
+    
+                if (rowsAffected > 0) {
+                    System.out.println("Data deleted successfully from user table!");
+                }
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @FXML

@@ -10,6 +10,12 @@ import java.util.List;
 
 public class RegisterCoursesController {
 
+    private String userId;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @FXML
     private VBox coursesContainer;
 
@@ -73,6 +79,6 @@ public class RegisterCoursesController {
     @FXML
     private void goBack(ActionEvent event) {
         // Use the static loadScreen method from StudentDashboardController
-        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event);
+        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event, userId);
     }
 }

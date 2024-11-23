@@ -8,6 +8,13 @@ import javafx.event.ActionEvent;
 
 public class WithdrawCoursesController {
 
+    private String userId;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+        
+    }
+
     @FXML
     private ChoiceBox<String> courseChoiceBox;
 
@@ -53,6 +60,6 @@ public class WithdrawCoursesController {
     @FXML
     private void goBack(ActionEvent event) {
         // Use the static loadScreen method from StudentDashboardController
-        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event);
+        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event, userId);
     }
 }

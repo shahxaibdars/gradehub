@@ -6,6 +6,12 @@ import javafx.event.ActionEvent;
 
 public class PrintAdmitCardController {
 
+    private String userId;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @FXML
     private TextArea eligibleCoursesTextArea;
 
@@ -65,6 +71,6 @@ public class PrintAdmitCardController {
     @FXML
     private void goBack(ActionEvent event) {
         // Use the static loadScreen method from StudentDashboardController
-        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event);
+        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event, userId);
     }
 }

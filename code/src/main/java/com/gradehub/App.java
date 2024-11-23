@@ -7,9 +7,14 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage stage) {
         try {
+
             // Debug: Print resource URLs
             System.out.println("FXML URL: " + getClass().getResource("/com/gradehub/login.fxml"));
             System.out.println("CSS URL: " + getClass().getResource("/com/gradehub/css/styles.css"));
@@ -27,9 +32,5 @@ public class App extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

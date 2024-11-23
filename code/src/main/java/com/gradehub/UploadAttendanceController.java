@@ -12,7 +12,7 @@ import javafx.event.ActionEvent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+//import java.util.Date;
 
 public class UploadAttendanceController {
 
@@ -74,7 +74,8 @@ public class UploadAttendanceController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
         try {
-            Date parsedDate = dateFormat.parse(date);
+            //Date parsedDate = dateFormat.parse(date);
+            dateFormat.parse(date);
             return true;
         } catch (ParseException e) {
             return false;

@@ -11,9 +11,12 @@
 
     <Label text="Add Student" styleClass="label-header"/>
     
-    <TextField fx:id="studentIdField" promptText="Enter Student ID" maxWidth="250" styleClass="text-field"/>
-    <TextField fx:id="studentNameField" promptText="Enter Name" maxWidth="250" styleClass="text-field"/>
-    <TextField fx:id="contactDetailsField" promptText="Enter Contact Details" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="nameField" promptText="Enter Name" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="idField" promptText="Assign Student ID" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="passwordField" promptText="Assign password" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="programField" promptText="Enter Program" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="enrolYearField" promptText="Enter Enrolment Year" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="contactField" promptText="Enter Phone Number" maxWidth="250" styleClass="text-field"/>
     
     <Button text="Submit" onAction="#handleAddStudent" styleClass="button"/>
     <Label fx:id="statusLabel" styleClass="label-status"/>
