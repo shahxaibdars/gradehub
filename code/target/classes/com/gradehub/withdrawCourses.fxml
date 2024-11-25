@@ -11,11 +11,11 @@
 
     <Label text="Withdraw Courses" styleClass="label-header"/>
     
-    <!-- ChoiceBox for selecting course -->
-    <ChoiceBox fx:id="courseChoiceBox" maxWidth="250" styleClass="choice-box"/>
-    
+    <!-- VBox to hold CheckBox elements for courses -->
+    <VBox fx:id="coursesContainer" spacing="10" styleClass="vbox-inner" maxWidth="250"/>
+
     <!-- Button to submit withdrawal -->
-    <Button text="Withdraw Selected Course" onAction="#handleWithdrawCourse" styleClass="button"/>
+    <Button text="Withdraw Selected Course" onAction="#handleWithdrawCourse" maxWidth="250" styleClass="button"/>
     
     <!-- Label to display withdrawal status -->
     <Label fx:id="statusLabel" styleClass="label-status"/>

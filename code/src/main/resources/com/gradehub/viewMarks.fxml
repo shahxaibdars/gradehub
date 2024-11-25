@@ -21,7 +21,7 @@
     <Button text="View Marks" onAction="#handleViewMarks" styleClass="button"/>
     
     <!-- TextArea to display marks -->
-    <TextArea fx:id="marksTextArea" editable="false" wrapText="true" maxWidth="200" maxHeight="50" styleClass="text-area"/>
+    <TextArea fx:id="marksTextArea" editable="false" wrapText="true" maxWidth="250" maxHeight="100" styleClass="text-area"/>
 
     <!-- Back Button -->
     <Button text="Back" onAction="#goBack" styleClass="button"/>

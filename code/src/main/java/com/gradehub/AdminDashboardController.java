@@ -32,6 +32,11 @@ public class AdminDashboardController {
     }
 
     @FXML
+    private void openAllocateCourseScreen(ActionEvent event) {
+        loadScreen("/com/gradehub/allocateCourse.fxml", event);
+    }
+
+    @FXML
     private void handleLogout(ActionEvent event) {
         loadScreen("/com/gradehub/login.fxml", event);
     }
@@ -39,7 +44,7 @@ public class AdminDashboardController {
     public static void loadScreen(String fxmlPath, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(AdminDashboardController.class.getResource(fxmlPath));
-            Scene scene = new Scene(loader.load());
+            Scene scene = new Scene(loader.load(), 800, 600);
             scene.getStylesheets().add(AdminDashboardController.class.getResource("/com/gradehub/css/styles.css").toExternalForm());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

@@ -11,7 +11,7 @@
 
     <Label text="Faculty Dashboard" styleClass="label-header"/>
     
-    <Button text="Upload Marks" onAction="#openUploadMarks" maxWidth="200" styleClass="button"/>
-    <Button text="Upload Attendance" onAction="#openUploadAttendance" maxWidth="200" styleClass="button"/>
+    <Button text="Upload Marks" onAction="#openUploadMarks" maxWidth="250" styleClass="button"/>
+    <Button text="Upload Attendance" onAction="#openUploadAttendance" maxWidth="250" styleClass="button"/>
     <Button text="Logout" onAction="#handleLogout" maxWidth="100" styleClass="button"/>
 </VBox>

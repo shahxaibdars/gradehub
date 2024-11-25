@@ -1,21 +1,25 @@
 package com.gradehub;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.utils.ValidationUtils;
+
+import com.users.Teacher;
 
 public class UploadAttendanceController {
 
+    String userId;
+    Teacher teacher;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+        teacher = new Teacher(userId);
+        postInitialize();
+    }
+    
     @FXML
     private ChoiceBox<String> courseChoiceBox;
 
@@ -33,14 +37,22 @@ public class UploadAttendanceController {
 
     @FXML
     public void initialize() {
-        // Populate courses (in a real application, fetch from the database)
-        ObservableList<String> courses = FXCollections.observableArrayList("CS101", "CS102", "CS103");
-        courseChoiceBox.setItems(courses);
-
         // Populate attendance options
-        ObservableList<String> attendanceOptions = FXCollections.observableArrayList("Present", "Absent");
+        ObservableList<String> attendanceOptions = FXCollections.observableArrayList("PRESENT", "ABSENT", "LATE", "LEAVE");
         attendanceChoiceBox.setItems(attendanceOptions);
-        attendanceChoiceBox.setValue("Present");
+        attendanceChoiceBox.setValue("PRESENT");
+    }
+
+    public void postInitialize(){
+        // Populate courses from the database
+        ObservableList<String> courses = teacher.fetchCoursesFromDatabase();
+        if (courses != null && !courses.isEmpty()) {
+            courseChoiceBox.setItems(courses);
+            courseChoiceBox.setValue("Select Course"); // Placeholder
+        } else {
+            courseChoiceBox.setItems(FXCollections.observableArrayList("No Courses Available"));
+            courseChoiceBox.setValue("No Courses Available"); // Placeholder
+        }
     }
 
     @FXML
@@ -57,55 +69,22 @@ public class UploadAttendanceController {
         }
 
         // Validate date format
-        if (!isValidDate(date)) {
-            statusLabel.setText("Invalid date format. Use dd/MM/yyyy.");
+        if (!ValidationUtils.isValidDate(date)) {
+            statusLabel.setText("Invalid date format. Use YYYY-MM-DD");
             return;
         }
 
         // Simulate saving attendance to the database
-        if (saveAttendanceToDatabase(course, date, studentId, attendanceStatus)) {
+        String result = teacher.saveAttendanceToDatabase(course, date, studentId, attendanceStatus);
+        if (result.equals("success")) {
             statusLabel.setText("Attendance uploaded successfully!");
         } else {
-            statusLabel.setText("Error uploading attendance.");
+            statusLabel.setText(result);
         }
-    }
-
-    private boolean isValidDate(String date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        dateFormat.setLenient(false);
-        try {
-            Date parsedDate = dateFormat.parse(date);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
-
-    private boolean saveAttendanceToDatabase(String course, String date, String studentId, String attendanceStatus) {
-        // Simulate saving attendance to the database
-        System.out.println("Saving attendance for course: " + course + ", date: " + date +
-                ", student: " + studentId + ", status: " + attendanceStatus);
-        return true;
     }
 
     @FXML
     private void goBack(ActionEvent event) {
-        loadScreen("/com/gradehub/facultyDashboard.fxml", event);
-    }
-
-    private void loadScreen(String fxmlPath, ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Scene scene = new Scene(loader.load());
-
-            // Apply stylesheet programmatically
-            scene.getStylesheets().add(getClass().getResource("/com/gradehub/css/styles.css").toExternalForm());
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.centerOnScreen();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FacultyDashboardController.loadScreen("/com/gradehub/facultyDashboard.fxml", event, userId);
     }
 }

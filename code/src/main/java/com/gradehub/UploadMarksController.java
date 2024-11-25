@@ -1,18 +1,28 @@
 package com.gradehub;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.Node;
-import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.users.Teacher;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class UploadMarksController {
+
+    String userId;
+    Teacher teacher;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+        teacher = new Teacher(userId);
+        postInitialize();
+    }
 
     @FXML
     private ChoiceBox<String> courseChoiceBox;
@@ -31,11 +41,23 @@ public class UploadMarksController {
 
     @FXML
     public void initialize() {
-        ObservableList<String> courses = FXCollections.observableArrayList("CS101", "CS102", "CS103");
-        courseChoiceBox.setItems(courses);
+        // Populate test types
+        ArrayList<String> testTypesList = new ArrayList<>(Arrays.asList("QUIZ", "ASSIGNMENT", "MIDTERM", "FINAL"));
+        ObservableList<String> testTypes = FXCollections.observableArrayList(testTypesList);
+        assessmentTypeChoiceBox.setItems(testTypes);
+        assessmentTypeChoiceBox.setValue("Select Test Type"); // Placeholder
+    }
 
-        ObservableList<String> assessmentTypes = FXCollections.observableArrayList("Quiz", "Assignment", "Exam");
-        assessmentTypeChoiceBox.setItems(assessmentTypes);
+    public void postInitialize(){
+        // Populate courses from the database
+        ObservableList<String> courses = teacher.fetchCoursesFromDatabase();
+        if (courses != null && !courses.isEmpty()) {
+            courseChoiceBox.setItems(courses);
+            courseChoiceBox.setValue("Select Course"); // Placeholder
+        } else {
+            courseChoiceBox.setItems(FXCollections.observableArrayList("No Courses Available"));
+            courseChoiceBox.setValue("No Courses Available"); // Placeholder
+        }
     }
 
     @FXML
@@ -50,36 +72,18 @@ public class UploadMarksController {
             return;
         }
 
-        if (saveMarksToDatabase(course, assessmentType, studentId, marks)) {
+        String result = teacher.saveMarksToDatabase(course, assessmentType, studentId, marks);
+        if (result.equals("success")) {
+            studentIdField.setText("");
+            marksField.setText("");
             statusLabel.setText("Marks uploaded successfully!");
         } else {
-            statusLabel.setText("Error uploading marks.");
+            statusLabel.setText(result);
         }
-    }
-
-    private boolean saveMarksToDatabase(String course, String assessmentType, String studentId, String marks) {
-        System.out.println("Course: " + course + ", Assessment: " + assessmentType + ", Student: " + studentId + " - Marks: " + marks);
-        return true;
     }
 
     @FXML
     private void goBack(ActionEvent event) {
-        loadScreen("/com/gradehub/facultyDashboard.fxml", event);
-    }
-
-    private void loadScreen(String fxmlPath, ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Scene scene = new Scene(loader.load());
-
-            // Apply stylesheet programmatically
-            scene.getStylesheets().add(getClass().getResource("/com/gradehub/css/styles.css").toExternalForm());
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.centerOnScreen();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FacultyDashboardController.loadScreen("/com/gradehub/facultyDashboard.fxml", event, userId);
     }
 }

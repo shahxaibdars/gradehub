@@ -1,16 +1,25 @@
 package com.gradehub;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import com.admin.Admin;
+
 import javafx.event.ActionEvent;
 
 public class RemoveStudentController {
+
+    Admin admin;
 
     @FXML
     private TextField studentIdField;
 
     @FXML
     private Label statusLabel;
+
+    @FXML
+    public void initialize() {
+        admin = Admin.getInstance();
+    }
 
     @FXML
     private void handleRemoveStudent() {
@@ -21,18 +30,13 @@ public class RemoveStudentController {
             return;
         }
 
-        // Simulate removing the student from the database
-        if (removeStudentFromDatabase(studentId)) {
+        String result = admin.removeStudentFromDatabase(studentId);
+        if (result.equals("success")) {
             statusLabel.setText("Student removed successfully!");
+            studentIdField.setText("");
         } else {
-            statusLabel.setText("Error removing student. ID not found.");
+            statusLabel.setText(result);
         }
-    }
-
-    private boolean removeStudentFromDatabase(String studentId) {
-        // Simulated database removal logic
-        System.out.println("Removing student with ID: " + studentId);
-        return true; // Return true if removal is successful
     }
 
     @FXML

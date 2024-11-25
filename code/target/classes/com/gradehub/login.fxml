@@ -12,8 +12,8 @@
     
     <Label text="Grade Hub" styleClass="label-header"/>
     
-    <TextField fx:id="usernameField" promptText="Username" maxWidth="250" styleClass="text-field"/>
-    <PasswordField fx:id="passwordField" promptText="Password" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="userIdField" promptText="Enter Id" maxWidth="250" styleClass="text-field"/>
+    <PasswordField fx:id="passwordField" promptText="Enter Password" maxWidth="250" styleClass="text-field"/>
     
     <Button text="Login" onAction="#handleLogin" maxWidth="100" styleClass="button"/>
     <Label fx:id="errorLabel" styleClass="label-status"/>

@@ -1,48 +1,92 @@
 package com.gradehub;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.admin.Admin;
+import com.utils.ValidationUtils;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class AddTeacherController {
 
-    @FXML
-    private TextField teacherIdField;
+    Admin admin;
 
     @FXML
-    private TextField teacherNameField;
+    private TextField idField;
 
     @FXML
-    private TextField contactDetailsField;
+    private TextField nameField;
 
     @FXML
-    private TextField courseField;
+    private TextField contactField;
+
+    @FXML
+    private TextField passwordField;
+
+    @FXML
+    private ChoiceBox<String> deptField;
+
+    @FXML
+    private ChoiceBox<String> desgField;
+
+    @FXML
+    private TextField joinField;
 
     @FXML
     private Label statusLabel;
 
     @FXML
-    private void handleAddTeacher() {
-        String teacherId = teacherIdField.getText();
-        String teacherName = teacherNameField.getText();
-        String contactDetails = contactDetailsField.getText();
-        String course = courseField.getText();
+    public void initialize() {
+        admin = Admin.getInstance();
+        // Populate test types
+        ArrayList<String> programList = new ArrayList<>(Arrays.asList("CS", "SE", "AI"));
+        ObservableList<String> programTypes = FXCollections.observableArrayList(programList);
+        deptField.setItems(programTypes);
+        deptField.setValue("CS");
 
-        if (teacherId.isEmpty() || teacherName.isEmpty() || contactDetails.isEmpty() || course.isEmpty()) {
+        ArrayList<String> professionList = new ArrayList<>(Arrays.asList("Lecturer", "Assistant Professor", "Associate Professor", "Professor"));
+        ObservableList<String> professsionTypes = FXCollections.observableArrayList(professionList);
+        desgField.setItems(professsionTypes);
+        desgField.setValue("Lecturer");
+    }
+
+    @FXML
+    private void handleAddTeacher() {
+        String id = idField.getText();
+        String name = nameField.getText();
+        String contact = contactField.getText();
+        String pass = passwordField.getText();
+        String dept = deptField.getValue();
+        String desg = desgField.getValue();
+        String join = joinField.getText();
+
+        if (id.isEmpty() || name.isEmpty() || contact.isEmpty() || pass.isEmpty() || dept.isEmpty() || desg.isEmpty() || join.isEmpty()) {
             statusLabel.setText("All fields are required.");
             return;
         }
 
-        if (saveTeacherToDatabase(teacherId, teacherName, contactDetails, course)) {
+        if (!ValidationUtils.isValidDate(join)) {
+            statusLabel.setText("Invalid date format. Use YYYY-MM-DD");
+            return;
+        }
+
+        String result = admin.saveTeacherToDatabase(id, pass, name, contact, dept, desg, join);
+        if (result.equals("success")) {
+            idField.setText("");
+            nameField.setText("");
+            contactField.setText("");
+            passwordField.setText("");
+            joinField.setText("");
+            deptField.setValue("CS");
+            desgField.setValue("Lecturer");
             statusLabel.setText("Teacher added successfully!");
         } else {
-            statusLabel.setText("Error adding teacher.");
+            statusLabel.setText(result);
         }
-    }
-
-    private boolean saveTeacherToDatabase(String teacherId, String teacherName, String contactDetails, String course) {
-        System.out.println("Saving teacher: " + teacherId + ", " + teacherName + ", " + contactDetails + ", " + course);
-        return true;
     }
 
     @FXML

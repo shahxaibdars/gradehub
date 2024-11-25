@@ -1,5 +1,4 @@
 package com.gradehub;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -8,7 +7,18 @@ import javafx.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.users.Student;
+
 public class RegisterCoursesController {
+
+    private String userId;
+    Student student;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+        student = new Student(userId);
+        postInitialize();
+    }
 
     @FXML
     private VBox coursesContainer;
@@ -16,16 +26,11 @@ public class RegisterCoursesController {
     @FXML
     private Label statusLabel;
 
-    @FXML
-    public void initialize() {
+    private void postInitialize() {
         // Simulating available courses fetched from a database
-        List<String> courses = List.of(
-                "CS101 - Data Structures",
-                "CS102 - Algorithms",
-                "CS103 - Operating Systems",
-                "CS104 - Database Systems"
-        );
 
+        ArrayList<String> courses = student.availableForRegistration(false);
+        coursesContainer.getChildren().clear();
         // Create CheckBox elements for each course
         for (String course : courses) {
             CheckBox checkBox = new CheckBox(course);
@@ -54,25 +59,19 @@ public class RegisterCoursesController {
         }
     
         // Simulate backend validation and registration
-        boolean success = registerCourses(selectedCourses);
+        boolean success = student.registerSelectedCourses(selectedCourses);
     
         if (success) {
             statusLabel.setText("Courses registered successfully!");
+            postInitialize();
         } else {
             statusLabel.setText("Error: Unable to register for the selected courses.");
         }
-    }
-    
-
-    private boolean registerCourses(List<String> selectedCourses) {
-        // Simulated backend logic (replace with actual database operations)
-        System.out.println("Registering courses: " + selectedCourses);
-        return true; // Simulated success
     }
 
     @FXML
     private void goBack(ActionEvent event) {
         // Use the static loadScreen method from StudentDashboardController
-        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event);
+        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event, userId);
     }
 }

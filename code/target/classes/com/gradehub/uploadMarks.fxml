@@ -26,8 +26,10 @@
     
     <!-- Buttons for submission and navigation -->
     <Button text="Submit" onAction="#handleUploadMarks" maxWidth="100" styleClass="button"/>
-    <Button text="Back" onAction="#goBack" maxWidth="100" styleClass="button"/>
     
     <!-- Status label for success/error messages -->
     <Label fx:id="statusLabel" styleClass="label-status"/>
+
+    <Button text="Back" onAction="#goBack" maxWidth="100" styleClass="button"/>
+    
 </VBox>

@@ -1,12 +1,25 @@
 package com.gradehub;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.users.Student;
+
 public class ViewMarksController {
+
+    private String userId;
+    Student s;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+        s = new Student(userId);
+        postInitialize();
+    }
 
     @FXML
     private ChoiceBox<String> courseChoiceBox;
@@ -15,49 +28,51 @@ public class ViewMarksController {
     private ChoiceBox<String> testTypeChoiceBox;
 
     @FXML
-    private Label marksLabel;
+    private TextArea marksTextArea;
 
     @FXML
     public void initialize() {
-        // Populate courses (simulating fetching from a database)
-        ObservableList<String> courses = FXCollections.observableArrayList("CS101", "CS102", "CS103");
-        courseChoiceBox.setItems(courses);
-        courseChoiceBox.setValue("Select Course"); // Placeholder
-    
         // Populate test types
-        ObservableList<String> testTypes = FXCollections.observableArrayList("Quiz", "Assignment", "Exam");
+        ArrayList<String> testTypesList = new ArrayList<>(Arrays.asList("QUIZ", "ASSIGNMENT", "MIDTERM", "FINAL"));
+        ObservableList<String> testTypes = FXCollections.observableArrayList(testTypesList);
         testTypeChoiceBox.setItems(testTypes);
         testTypeChoiceBox.setValue("Select Test Type"); // Placeholder
     }
-    
+
+    public void postInitialize(){
+        // Populate courses from the database
+        ObservableList<String> courses = s.fetchCoursesFromDatabase();
+        if (courses != null && !courses.isEmpty()) {
+            courseChoiceBox.setItems(courses);
+            courseChoiceBox.setValue("Select Course"); // Placeholder
+        } else {
+            courseChoiceBox.setItems(FXCollections.observableArrayList("No Courses Available"));
+            courseChoiceBox.setValue("No Courses Available"); // Placeholder
+        }
+    }
 
     @FXML
     private void handleViewMarks() {
         String selectedCourse = courseChoiceBox.getValue();
         String selectedTestType = testTypeChoiceBox.getValue();
 
-        if (selectedCourse == null || selectedTestType == null) {
-            marksLabel.setText("Please select both a course and test type.");
+        if (selectedCourse == null || selectedTestType == null || 
+            selectedCourse.equals("Select Course") || selectedTestType.equals("Select Test Type")) {
+            marksTextArea.setText("Please select both a course and test type.");
             return;
         }
 
-        // Simulate fetching marks for the selected course and test type
-        String marks = fetchMarks(selectedCourse, selectedTestType);
-        marksLabel.setText("Marks for " + selectedTestType + " in " + selectedCourse + ": " + marks);
-    }
-
-    private String fetchMarks(String course, String testType) {
-        // Simulated data fetching (replace with actual database logic)
-        System.out.println("Fetching marks for course: " + course + ", test type: " + testType);
-        return "85"; // Simulated marks
+        String marks = s.fetchMarks(selectedCourse, selectedTestType);
+        if (marks == null) {
+            marksTextArea.setText("No marks found for " + selectedTestType + " in " + selectedCourse + ".");
+        } else {
+            marksTextArea.setText("Marks for " + selectedTestType + " in " + selectedCourse + ": " + marks);
+        }
     }
 
     @FXML
     private void goBack(ActionEvent event) {
         // Use the static loadScreen method from StudentDashboardController
-        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event);
+        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event, userId);
     }
 }
-
-
-

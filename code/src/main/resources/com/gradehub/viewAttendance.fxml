@@ -14,11 +14,14 @@
     <!-- ChoiceBox for selecting course -->
     <ChoiceBox fx:id="courseChoiceBox" maxWidth="250" styleClass="choice-box"/>
     
+    <!-- Button to view marks -->
+    <Button text="View Attendance" onAction="#handleViewAttendance" styleClass="button"/>
+
     <!-- Label to display attendance percentage -->
     <Label fx:id="attendancePercentageLabel" styleClass="label-status"/>
 
     <!-- TextArea for detailed attendance sheet -->
-    <TextArea fx:id="attendanceDetailsTextArea" editable="false" wrapText="true" maxWidth="300" maxHeight="200" styleClass="text-area"/>
+    <TextArea fx:id="attendanceDetailsTextArea" editable="false" wrapText="true" maxWidth="250" maxHeight="200" styleClass="text-area"/>
 
     <!-- Back Button -->
     <Button text="Back" onAction="#goBack" styleClass="button"/>

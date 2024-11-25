@@ -16,13 +16,13 @@
     <ChoiceBox fx:id="courseChoiceBox" maxWidth="250" styleClass="choice-box"/>
     
     <!-- TextField for entering date -->
-    <TextField fx:id="dateField" promptText="Enter Date (dd/MM/yyyy)" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="dateField" promptText="Enter Date (YYYY-MM-DD)" maxWidth="250" styleClass="text-field"/>
     
     <!-- TextField for entering Student ID -->
     <TextField fx:id="studentIdField" promptText="Enter Student ID" maxWidth="250" styleClass="text-field"/>
     
     <!-- ChoiceBox for selecting attendance status -->
-    <ChoiceBox fx:id="attendanceChoiceBox" maxWidth="150" styleClass="choice-box"/>
+    <ChoiceBox fx:id="attendanceChoiceBox" maxWidth="200" styleClass="choice-box"/>
     
     <!-- Submit Button -->
     <Button text="Submit" onAction="#handleUploadAttendance" maxWidth="100" styleClass="button"/>

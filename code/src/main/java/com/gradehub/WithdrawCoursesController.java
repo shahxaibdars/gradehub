@@ -1,58 +1,77 @@
 package com.gradehub;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.users.Student;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 
 public class WithdrawCoursesController {
 
+    private String userId;
+    Student student;
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+        student = new Student(userId);
+        postInitialize();
+    }
+
     @FXML
-    private ChoiceBox<String> courseChoiceBox;
+    private VBox coursesContainer;
 
     @FXML
     private Label statusLabel;
 
-    @FXML
-    public void initialize() {
+    private void postInitialize() {
         // Simulating available courses fetched from a database
-        ObservableList<String> courses = FXCollections.observableArrayList(
-                "CS101 - Data Structures",
-                "CS102 - Algorithms",
-                "CS103 - Operating Systems"
-        );
-        courseChoiceBox.setItems(courses);
+
+        ArrayList<String> courses = student.availableForRegistration(true);
+        coursesContainer.getChildren().clear();
+        // Create CheckBox elements for each course
+        for (String course : courses) {
+            CheckBox checkBox = new CheckBox(course);
+            checkBox.setStyle("-fx-font-size: 14px; -fx-text-fill: #333;"); // Optional styling
+            coursesContainer.getChildren().add(checkBox);
+        }
     }
 
     @FXML
     private void handleWithdrawCourse() {
-        String selectedCourse = courseChoiceBox.getValue();
-
-        if (selectedCourse == null) {
-            statusLabel.setText("Please select a course to withdraw.");
+        List<String> selectedCourses = new ArrayList<>();
+    
+        // Iterate over nodes and manually check for CheckBox instances
+        for (var node : coursesContainer.getChildren()) {
+            if (node instanceof CheckBox) {
+                CheckBox checkBox = (CheckBox) node; // Explicit cast
+                if (checkBox.isSelected()) {
+                    selectedCourses.add(checkBox.getText());
+                }
+            }
+        }
+    
+        if (selectedCourses.isEmpty()) {
+            statusLabel.setText("Please select at least one course to withdraw.");
             return;
         }
-
-        // Simulate backend validation and withdrawal process
-        boolean success = withdrawCourse(selectedCourse);
+    
+        // Simulate backend validation and registration
+        boolean success = student.withdrawSelectedCourses(selectedCourses);
 
         if (success) {
             statusLabel.setText("Course withdrawal successful!");
+            postInitialize();
         } else {
             statusLabel.setText("Error: Unable to process withdrawal request.");
         }
     }
 
-    private boolean withdrawCourse(String course) {
-        // Simulated backend logic (replace with actual database operations)
-        System.out.println("Withdrawing course: " + course);
-        return true; // Simulated success
-    }
-
     @FXML
     private void goBack(ActionEvent event) {
         // Use the static loadScreen method from StudentDashboardController
-        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event);
+        StudentDashboardController.loadScreen("/com/gradehub/studentDashboard.fxml", event, userId);
     }
 }

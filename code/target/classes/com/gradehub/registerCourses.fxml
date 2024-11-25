@@ -12,10 +12,10 @@
     <Label text="Register Courses" styleClass="label-header"/>
     
     <!-- VBox to hold CheckBox elements for courses -->
-    <VBox fx:id="coursesContainer" spacing="10" styleClass="vbox-inner" maxWidth="300"/>
+    <VBox fx:id="coursesContainer" spacing="10" styleClass="vbox-inner" maxWidth="250"/>
 
     <!-- Button to confirm registration -->
-    <Button text="Register Selected Courses" onAction="#handleRegisterCourses" styleClass="button"/>
+    <Button text="Register Selected Courses" onAction="#handleRegisterCourses" maxWidth="250" styleClass="button"/>
     
     <!-- Label to display registration status -->
     <Label fx:id="statusLabel" styleClass="label-status"/>

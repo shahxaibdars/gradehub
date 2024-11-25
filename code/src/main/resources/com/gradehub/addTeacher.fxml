@@ -11,11 +11,14 @@
 
     <Label text="Add Teacher" styleClass="label-header"/>
     
-    <TextField fx:id="teacherIdField" promptText="Enter Teacher ID" maxWidth="250" styleClass="text-field"/>
-    <TextField fx:id="teacherNameField" promptText="Enter Name" maxWidth="250" styleClass="text-field"/>
-    <TextField fx:id="contactDetailsField" promptText="Enter Contact Details" maxWidth="250" styleClass="text-field"/>
-    <TextField fx:id="courseField" promptText="Enter Course" maxWidth="250" styleClass="text-field"/>
-    
+    <TextField fx:id="nameField" promptText="Enter Name" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="idField" promptText="Assign Teacher ID" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="passwordField" promptText="Assign password" maxWidth="250" styleClass="text-field"/>
+    <TextField fx:id="contactField" promptText="Enter Phone Number" maxWidth="250" styleClass="text-field"/>
+    <ChoiceBox fx:id="deptField" maxWidth="250" styleClass="choice-box"/>
+    <ChoiceBox fx:id="desgField" maxWidth="250" styleClass="choice-box"/>
+    <TextField fx:id="joinField" promptText="Enter Join Date (YYYY-MM-DD)" maxWidth="250" styleClass="text-field"/>
+
     <Button text="Submit" onAction="#handleAddTeacher" styleClass="button"/>
     <Label fx:id="statusLabel" styleClass="label-status"/>
     <Button text="Back" onAction="#goBack" styleClass="button"/>
