@@ -1,12 +1,10 @@
-package com.admin;
+package com.users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.database.DatabaseConnector;
-import com.users.Student;
-import com.users.Teacher;
 import com.academic.Course;
 
 public class Admin {
@@ -48,7 +46,7 @@ public class Admin {
 
     public String saveStudentToDatabase(String id, String password, String name, String contact, String program, String enrolYear) {
         
-        if (Student.validateStudent(id)){
+        if (Student.validate(id)){
             return "ID already in use";
         }
         
@@ -100,7 +98,7 @@ public class Admin {
 
     public String removeStudentFromDatabase(String studentId){
 
-        if (!(Student.validateStudent(studentId))){
+        if (!(Student.validate(studentId))){
             return "ID NOT FOUND!";
         }
         DatabaseConnector db = DatabaseConnector.getInstance();
@@ -141,7 +139,7 @@ public class Admin {
 
     public String saveTeacherToDatabase(String id, String password, String name, String contact, String dept, String desg, String join) {
         
-        if ((Teacher.validateTeacher(id))){
+        if ((Teacher.validate(id))){
             return "ID already in USE";
         }
         
@@ -192,7 +190,7 @@ public class Admin {
 
     public String removeTeacherFromDatabase(String teacherId) {
         
-        if (!(Teacher.validateTeacher(teacherId))){
+        if (!(Teacher.validate(teacherId))){
             return "ID NOT FOUND!";
         }
         DatabaseConnector db = DatabaseConnector.getInstance();
@@ -238,7 +236,7 @@ public class Admin {
 
         if (!(course.validateCourse())){
             return "Course Id not found";
-        } else if (!(Teacher.validateTeacher(teacherId))){
+        } else if (!(Teacher.validate(teacherId))){
             return "Teacher Id not found";
         } else if (course.validateCourseTeacher()){
             return "This course is already allocated";

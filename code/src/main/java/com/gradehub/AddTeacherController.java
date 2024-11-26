@@ -2,7 +2,7 @@ package com.gradehub;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.admin.Admin;
+import com.users.Admin;
 import com.utils.ValidationUtils;
 
 import javafx.fxml.FXML;

@@ -1,6 +1,6 @@
 package com.gradehub;
 
-import com.admin.Admin;
+import com.users.Admin;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

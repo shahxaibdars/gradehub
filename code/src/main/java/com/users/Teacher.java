@@ -10,15 +10,15 @@ import com.academic.Assessment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Teacher extends User{
+public class Teacher extends User implements UserInterface{
     private String dept;
 
     public Teacher(String id){
         super(id);
-        initializeTeacher();
+        initialize();
     }
 
-    public static boolean validateTeacher(String teacherId){
+    static boolean validate(String teacherId){
         DatabaseConnector db = DatabaseConnector.getInstance();
 
         try{
@@ -48,7 +48,7 @@ public class Teacher extends User{
         return false;
     }
 
-    private void initializeTeacher(){
+    public void initialize(){
         String searchQuery = "SELECT name, phoneNumber, department FROM user, faculty where faculty.userId = user.userId AND faculty.userId = ? ";
         DatabaseConnector db = DatabaseConnector.getInstance();
         try (Connection connection = db.connect();
@@ -101,7 +101,7 @@ public class Teacher extends User{
             return result;
         }
 
-        if (!Student.validateStudent(studentId)){
+        if (!Student.validate(studentId)){
             return "Student ID not found";
         }
 
@@ -156,7 +156,7 @@ public class Teacher extends User{
 
     public String saveAttendanceToDatabase(String course, String date, String studentId, String attendanceStatus) {
         // Simulate saving attendance to the database
-        if (!Student.validateStudent(studentId)){
+        if (!Student.validate(studentId)){
             return "Student ID not found!";
         }
 

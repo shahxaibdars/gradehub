@@ -2,7 +2,7 @@ package com.gradehub;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import com.admin.Admin;
+import com.users.Admin;
 
 import javafx.event.ActionEvent;
 

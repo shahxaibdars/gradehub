@@ -11,17 +11,17 @@ import com.database.DatabaseConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Student extends User{
+public class Student extends User implements UserInterface{
 
     private String program;
     private String semester;
 
     public Student(String id){
         super(id);
-        initializeStudent();
+        initialize();
     }
 
-    public static boolean validateStudent(String studentId){
+    static boolean validate(String studentId){
         DatabaseConnector db = DatabaseConnector.getInstance();
         try{
             String searchQuery = "SELECT userId from Student where userId = ? ";
@@ -49,7 +49,7 @@ public class Student extends User{
         return false;
     }
 
-    private void initializeStudent(){
+    public void initialize(){
         String searchQuery = "SELECT name, phoneNumber, department, semester FROM user, student where student.userId = user.userId AND student.userId = ? ";
         DatabaseConnector db = DatabaseConnector.getInstance();
         try (Connection connection = db.connect();

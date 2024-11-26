@@ -1,9 +1,10 @@
 package com.gradehub;
 
-import com.admin.Admin;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import com.users.Admin;
+
 import javafx.event.ActionEvent;
 
 public class AllocateCourseController {
